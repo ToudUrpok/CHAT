@@ -1,0 +1,88 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\ChatServer\\ChatServer.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\ChatServer\\ChatServer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\ChatServer\\ChatServer.csproj",
+        "projectName": "ChatServer",
+        "projectPath": "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\ChatServer\\ChatServer.csproj",
+        "packagesPath": "C:\\Users\\Xiaomi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\ChatServer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Xiaomi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\InteractionTools\\InteractionTools.csproj": {
+                "projectPath": "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\InteractionTools\\InteractionTools.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\InteractionTools\\InteractionTools.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\InteractionTools\\InteractionTools.csproj",
+        "projectName": "InteractionTools",
+        "projectPath": "C:\\Users\\Xiaomi\\source\\repos\\C#\\КСиС\\2\\10x — копия\\InteractionTools\\InteractionTools.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}
