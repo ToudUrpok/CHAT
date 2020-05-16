@@ -110,6 +110,9 @@ namespace ChatServer
                             new ChatMessage(message.SenderID, message.SenderName, message.content, DateTime.Now));
                     }
                     break;
+                case MessageType.DialogData:
+                        SendMessage(new LANMessage(MessageType.DialogData, Clients[message.SenderID].Dialogs[message.Port]), Connections[connectionID].socket);
+                    break;
             }
         }
 
