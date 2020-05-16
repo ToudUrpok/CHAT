@@ -81,28 +81,33 @@ namespace ChatClient
             SendMessage(new LANMessage(MessageType.Identification, name, id, ((IPEndPoint)TCPsocket.LocalEndPoint).Address.ToString()));
         }
 
+        static int BUFFER_SIZE = 1024; //in bytes
         public void ReceiveMessages()
         {
             while (TCPsocket.Connected)
             {
-                byte[] data = new byte[10000];
-                int sum = 0;
+                byte[] buffer = new byte[BUFFER_SIZE];
                 MemoryStream message = new MemoryStream();
-                    do
+                do
+                {
+                    try
                     {
-                            try
-                            {
-                                int count = TCPsocket.Receive(data);
-                                message.Write(data, sum, count);
-                                sum += count;
-                            }
-                            catch
-                            {
-                            }
+                        int amount = TCPsocket.Receive(buffer);
+                        message.Write(buffer, 0, amount);
                     }
-                    while (TCPsocket.Available > 0);
-                    if (message.GetBuffer().Length > 0)
-                        MessageReceieved(messageSerializer.Deserialize(message.GetBuffer()));
+                    catch (SocketException ex)
+                    {
+                        Console.WriteLine(ex.ErrorCode);
+                        Console.WriteLine(ex.Message);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                while (TCPsocket.Available != 0); //>0
+                if (message.GetBuffer().Length > 0)
+                    MessageReceieved(messageSerializer.Deserialize(message.GetBuffer()));
             }
         }
 

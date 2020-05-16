@@ -7,7 +7,7 @@ using InteractionTools;
 namespace InteractionTools
 {
     [Serializable]
-    public class DialogInfo
+    public class DialogInfo : ICloneable
     {
         public bool IsActive;
         public string Name;
@@ -22,6 +22,17 @@ namespace InteractionTools
             MessagesHistory = new List<ChatMessage>();
             UnreadMessCount = 0;
             Id = id;
+        }
+
+        public object Clone()
+        {
+            var dialog = (DialogInfo)this.MemberwiseClone();
+            dialog.MessagesHistory = new List<ChatMessage>();
+            foreach (ChatMessage message in this.MessagesHistory)
+            {
+                dialog.MessagesHistory.Add((ChatMessage)message.Clone());
+            }
+            return dialog;
         }
 
         public DialogInfo()

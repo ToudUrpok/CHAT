@@ -5,7 +5,7 @@ using System.Text;
 namespace InteractionTools
 {
     [Serializable]
-    public class ChatMessage
+    public class ChatMessage : ICloneable
     {
         public int SenderId;
         public string SenderName;
@@ -18,6 +18,11 @@ namespace InteractionTools
             SenderName = name;
             Content = content;
             Time = time;
+        }
+        public object Clone()
+        {
+            var message = (ChatMessage)this.MemberwiseClone();
+            return message;
         }
 
         public ChatMessage()

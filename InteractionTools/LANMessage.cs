@@ -6,7 +6,7 @@ using System.Net;
 
 namespace InteractionTools
 {
-    public enum MessageType { UDPRequest, UDPResponse, PrivateMess, CommonMess, Identification, ClientJoin, ClientExit, ClientHistory };
+    public enum MessageType { UDPRequest, UDPResponse, PrivateMess, CommonMess, Identification, ClientJoin, ClientExit, ClientHistory, DialogData };
 
     [Serializable]
     public class LANMessage
@@ -43,7 +43,16 @@ namespace InteractionTools
         public LANMessage(MessageType messType, List<DialogInfo> dialogs)
         {
             messageType = messType;
-            Dialogs = dialogs;
+            Dialogs = new List<DialogInfo>();
+            foreach(DialogInfo dialog in dialogs)
+            {
+                var temp = (DialogInfo)dialog.Clone();
+                if (dialog.Id != 0)
+                {
+                    temp.MessagesHistory.Clear();
+                }
+                Dialogs.Add(temp);
+            }
         }
         public LANMessage(MessageType messType, int newClientId, string name)
         {
@@ -55,6 +64,22 @@ namespace InteractionTools
         {
             messageType = messType;
             SenderID = newClientId;
+            Dialogs = new List<DialogInfo>
+            {
+                dialog
+            };
+        }
+
+        public LANMessage(MessageType messType, int clientId, int dialogId)
+        {
+            messageType = messType;
+            SenderID = clientId;
+            Port = dialogId;
+        }
+
+        public LANMessage(MessageType messType, DialogInfo dialog)
+        {
+            messageType = messType;
             Dialogs = new List<DialogInfo>
             {
                 dialog

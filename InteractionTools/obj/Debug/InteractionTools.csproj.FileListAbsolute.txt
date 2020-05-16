@@ -10,3 +10,15 @@ C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x — копия\InteractionTools\o
 C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x — копия\InteractionTools\obj\Debug\InteractionTools.csproj.CoreCompileInputs.cache
 C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x — копия\InteractionTools\obj\Debug\InteractionTools.dll
 C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x — копия\InteractionTools\obj\Debug\InteractionTools.pdb
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал\InteractionTools\bin\Debug\InteractionTools.dll
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал\InteractionTools\bin\Debug\InteractionTools.pdb
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал\InteractionTools\obj\Debug\InteractionTools.csprojAssemblyReference.cache
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал\InteractionTools\obj\Debug\InteractionTools.csproj.CoreCompileInputs.cache
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал\InteractionTools\obj\Debug\InteractionTools.dll
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал\InteractionTools\obj\Debug\InteractionTools.pdb
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал — копия\InteractionTools\obj\Debug\InteractionTools.csprojAssemblyReference.cache
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал — копия\InteractionTools\obj\Debug\InteractionTools.csproj.CoreCompileInputs.cache
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал — копия\InteractionTools\obj\Debug\InteractionTools.dll
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал — копия\InteractionTools\obj\Debug\InteractionTools.pdb
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал — копия\InteractionTools\bin\Debug\InteractionTools.dll
+C:\Users\Xiaomi\source\repos\C#\КСиС\2\10x__тачтосдавал — копия\InteractionTools\bin\Debug\InteractionTools.pdb

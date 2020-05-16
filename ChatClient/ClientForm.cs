@@ -12,11 +12,22 @@ using System.Net;
 
 namespace ChatClient
 {
+    public struct ClientDialog
+    {
+        public int Id;
+        public bool IsDownloaded;
+
+        public ClientDialog(int id)
+        {
+            Id = id;
+            IsDownloaded = (id == 0);
+        }
+    }
     public partial class ClientForm : Form
     {
         Client client;
         CommunityData communityData;
-        Dictionary<int, int> MatchingDialogs;
+        Dictionary<int, ClientDialog> MatchingDialogs;
         const int CommonDialogID = 0;
         int CurrentDialog;
         public ClientForm()
@@ -34,7 +45,7 @@ namespace ChatClient
                         {
                             communityData = new CommunityData(DialogInfoMethods.ListIntoDictionary(message.Dialogs));
                             CurrentDialog = CommonDialogID;
-                            MatchingDialogs = new Dictionary<int, int>();
+                            MatchingDialogs = new Dictionary<int, ClientDialog>();
                             UpdateParticipants();
                             if (CommonDialogID == CurrentDialog)
                                 UpdateContent();
@@ -115,6 +126,11 @@ namespace ChatClient
                         UpdateParticipants();
                     }
                     break;
+                case MessageType.DialogData:
+                    DialogInfo receivedDialog = message.Dialogs.Last();
+                    communityData.Dialogs[receivedDialog.Id] = receivedDialog;
+                    UpdateSelectedDialog();
+                    break;
             }
         }
 
@@ -127,7 +143,7 @@ namespace ChatClient
                 MatchingDialogs.Clear();
                 foreach (DialogInfo dialog in communityData.Dialogs.Values)
                 {
-                    MatchingDialogs.Add(index, dialog.Id);
+                    MatchingDialogs.Add(index, new ClientDialog(dialog.Id));
                     lbParticipants.Items.Insert(index, ((dialog.IsActive) ?
                         "[on]" : "[off]") + "  " + dialog.Name + "  " + ((dialog.UnreadMessCount != 0) ?
                         dialog.UnreadMessCount.ToString() : ""));
@@ -145,7 +161,7 @@ namespace ChatClient
             Action action = delegate
             {
                 tbChatContent.Clear();
-                foreach (ChatMessage message in communityData.Dialogs[MatchingDialogs[CurrentDialog]].MessagesHistory)
+                foreach (ChatMessage message in communityData.Dialogs[MatchingDialogs[CurrentDialog].Id].MessagesHistory)
                 {
                     tbChatContent.Text += message.SenderName + ": " + message.Content + "  " + message.Time.ToString() + "\r\n";
                 }
@@ -222,13 +238,13 @@ namespace ChatClient
                 }
                 else
                 {
-                    client.SendMessage(new LANMessage(MessageType.PrivateMess, client.ClientId, MatchingDialogs[CurrentDialog], ((IPEndPoint)client.TCPsocket.LocalEndPoint).Address.ToString(), tbMessageContent.Text));
+                    client.SendMessage(new LANMessage(MessageType.PrivateMess, client.ClientId, MatchingDialogs[CurrentDialog].Id, ((IPEndPoint)client.TCPsocket.LocalEndPoint).Address.ToString(), tbMessageContent.Text));
                 }
-                DialogInfoMethods.AddMessage(communityData.Dialogs[MatchingDialogs[CurrentDialog]].MessagesHistory,
-                    ref communityData.Dialogs[MatchingDialogs[CurrentDialog]].UnreadMessCount,
+                DialogInfoMethods.AddMessage(communityData.Dialogs[MatchingDialogs[CurrentDialog].Id].MessagesHistory,
+                    ref communityData.Dialogs[MatchingDialogs[CurrentDialog].Id].UnreadMessCount,
                     new ChatMessage(client.ClientId, "me", tbMessageContent.Text, DateTime.Now));
                 UpdateContent();
-                communityData.Dialogs[MatchingDialogs[CurrentDialog]].UnreadMessCount--;
+                communityData.Dialogs[MatchingDialogs[CurrentDialog].Id].UnreadMessCount--;
                 tbMessageContent.Clear();
             }
         }
@@ -240,12 +256,24 @@ namespace ChatClient
             if (CurrentDialog != lbParticipants.SelectedIndex)
             {
                 CurrentDialog = lbParticipants.SelectedIndex;
-                lbCurrentDialog.Text = communityData.Dialogs[MatchingDialogs[CurrentDialog]].Name;
-                UpdateContent();
-                btSendMessage.Enabled = communityData.Dialogs[MatchingDialogs[CurrentDialog]].IsActive;
-                communityData.Dialogs[MatchingDialogs[CurrentDialog]].UnreadMessCount = 0;
-                UpdateParticipants();
+                lbCurrentDialog.Text = communityData.Dialogs[MatchingDialogs[CurrentDialog].Id].Name;
+                if (!MatchingDialogs[CurrentDialog].IsDownloaded)
+                {
+                    client.SendMessage(new LANMessage(MessageType.DialogData, client.ClientId, MatchingDialogs[CurrentDialog].Id));
+                }
+                else
+                {
+                    UpdateSelectedDialog();
+                }
             }
+        }
+
+        private void UpdateSelectedDialog()
+        {
+            UpdateContent();
+            btSendMessage.Enabled = communityData.Dialogs[MatchingDialogs[CurrentDialog].Id].IsActive;
+            communityData.Dialogs[MatchingDialogs[CurrentDialog].Id].UnreadMessCount = 0;
+            UpdateParticipants();
         }
     }
 }
